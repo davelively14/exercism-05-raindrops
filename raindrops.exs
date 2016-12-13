@@ -11,17 +11,17 @@ defmodule Raindrops do
   @factors [{3, "Pling"}, {5, "Plang"}, {7, "Plong"}]
 
   @spec convert(pos_integer) :: String.t
-  def convert(number, factors \\ @factors), do: check_all(number, factors, "")
+  def convert(number, factors \\ @factors), do: convert(number, factors, "")
 
-  def check_all(number, [], result) do
+  def convert(number, [], result) do
       if result == "", do: Integer.to_string(number), else: result
   end
 
-  def check_all(number, [{prime, string} | tail], result) do
+  def convert(number, [{prime, string} | tail], result) do
     if rem(number, prime) == 0 do
-      check_all(number, tail, result <> string)
+      convert(number, tail, result <> string)
     else
-      check_all(number, tail, result)
+      convert(number, tail, result)
     end
   end
 
